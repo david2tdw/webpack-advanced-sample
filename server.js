@@ -1,8 +1,18 @@
 let express = require('express')
+const Mock = require('mockjs')
 let app = express()
 
-app.get('/user', (req, res) => {
-  res.json({name: '刘小夕23'})
+// app.get('/user', (req, res) => {
+//   res.json({name: '刘小夕23'})
+// })
+
+app.all('/user', (req, res) => {
+  res.json(
+    Mock.mock({
+      status: 200,
+      'name|5-8': /刘小夕[a-zA-Z]/
+    })
+  )
 })
 
 app.listen(4000)
